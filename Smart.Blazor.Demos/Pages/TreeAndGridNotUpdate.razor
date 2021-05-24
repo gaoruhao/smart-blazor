@@ -1,0 +1,48 @@
+﻿@page "/treegridnotupdate"
+
+<Tree>
+   @foreach (var treeItem in StringItems)
+   {
+      <TreeItem>@treeItem</TreeItem>
+   }
+</Tree>
+
+<Grid Style="width: 80%; height: auto;">
+   <Columns>
+      <Column DataField="String" Label="Name"></Column>
+   </Columns>
+   <Rows>
+      @foreach (var item in StringItems)
+      {
+         <Row>
+            <Cell Content="item"></Cell>
+         </Row>
+      }
+   </Rows>
+</Grid>
+
+<button @onclick="OnClick">Update</button>
+
+@code {
+
+   public List<string> StringItems { get; set; } = new List<string>();
+
+   protected override void OnInitialized()
+   {
+      base.OnInitialized();
+
+      this.StringItems = new List<string>()
+      {
+         "Item 1",
+         "Item 2",
+      };
+   }
+
+   private void OnClick()
+   {
+      StringItems.Add("Item 3");
+
+      StateHasChanged();
+   }
+
+}
