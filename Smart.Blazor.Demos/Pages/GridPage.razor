@@ -21,6 +21,7 @@
 				<Column DataField="TemperatureC" Label="TemperatureC"></Column>
 				<Column DataField="TemperatureF" Label="TemperatureF"></Column>
 				<Column DataField="Summary" Label="Summary"></Column>
+            @*<Column DataField="Configure" Label="Configure" ></Column>*@
 			</Columns>
 			<Rows>
 				@foreach (var forecast in forecasts)
@@ -30,7 +31,7 @@
 						<Cell Content="@forecast.TemperatureC"></Cell>
 						<Cell Content="@forecast.TemperatureF"></Cell>
 						<Cell Content="@forecast.Summary"></Cell>
-					</Row>
+               </Row>
 				}
 			</Rows>
 		</Grid>

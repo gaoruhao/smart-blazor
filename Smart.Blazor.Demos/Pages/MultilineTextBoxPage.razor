@@ -1,9 +1,18 @@
 ﻿@page "/multilinetextbox"
 
 <Example Name="MultilineTextBox">
-		<MultilineTextBox></MultilineTextBox>
+		<MultilineTextBox OnChange=@OnChange></MultilineTextBox>
 </Example>
 
 @code {
+
+   internal void OnChange(Event args)
+   {
+      MultilineTextBoxChangeEventDetail detail = args["Detail"];
+
+      string newNotes = detail.Value;
+      Console.WriteLine($"multiline {newNotes}");
+      // TODO: Save notes to SystemService
+   }
 
 }

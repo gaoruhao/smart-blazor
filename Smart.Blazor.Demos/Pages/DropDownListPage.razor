@@ -11,20 +11,35 @@
 	else
 	{
 		<h2>Forecasts Summary</h2>
-		<DropDownList SelectedIndexes="new int[] { 0 }">
+	   <DropDownList @ref=dropdown
+                     SelectedIndexes="new int[] { 0 }"
+                     DropDownOpenMode=@DropDownOpenMode.DropDownButton>
 			@foreach (var forecast in forecasts)
 			{
 				<ListItem Label="@forecast.Summary.Trim()"></ListItem>
 			}
 		</DropDownList>
+	   <button @onclick=OnUpdate >Update</button>
 	}
 </Example>
 
 @code {
-	private WeatherForecast[] forecasts;
+   private WeatherForecast[] forecasts;
 
-	protected override async Task OnInitializedAsync()
-	{
-		forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
-	}
+   protected override async Task OnInitializedAsync()
+   {
+      forecasts = await ForecastService.GetForecastAsync(DateTime.Now);
+   }
+
+   private void OnUpdate()
+   {
+      var list = forecasts.ToList();
+      list.AddRange(forecasts);
+
+      forecasts = list.ToArray();
+
+      //dropdown.StateHasChanged();
+   }
+
+   private DropDownList dropdown;
 }
